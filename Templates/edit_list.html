@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title> Edit_Order_Detail_by_DepartmentHead</title>
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <script defer src="{% static 'fontawesome/js/all.min.js' %}"></script>
+<style>
+  
+
+       /* header */
+* {box-sizing: border-box;}
+
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+}
+
+/* Style the header links */
+
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+img {
+  max-width: 35%;
+}
+
+.header a.logo {
+   max-width: 35%;
+}
+
+/* Change the background color on mouse-over */
+.header a:hover {
+  background-color: grey;
+  color: black;
+}
+
+/* Style the active/current link*/
+.header a.active {
+  background-color: lightblue;
+  color: white;
+}
+
+/* Float the link section to the right */
+.header-right {
+  float: right;
+}
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
+}
+
+.asd {
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: #CC6666;
+   color: white;
+   text-align: center;
+}
+
+.xyz {
+
+  margin: auto;
+  background-color: #EEEEFF;
+  width: 1100px;
+  height: 250px;
+  padding: 15px;
+  border: 3px #f1e1cc;
+
+       }
+
+
+  </style>
+</head>
+
+<body>
+<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Header Section end -->
+<div class="header">
+<a href="" class="site-logo">
+  <img src="{% static 'img/logo.png' %}" alt="">
+</a>
+ <div class="header-right">
+    <a href="" class="active">Details</a>
+    <a href="" >  Hey,{{request.user.username|capfirst}} </a>
+    <a href="{% url 'account:index'  %}" class="btn btn-outline-primary"> Back</a>
+</div>
+</div>
+
+
+{% if messages %}
+
+{% for message in messages %}
+
+<p class="alert alert-danger">{{message}}</p>
+
+{% endfor %}
+
+
+{% endif %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<section>
+  <div class="xyz">
+<form method="POST">
+{% csrf_token %}
+<div class="row">
+    
+    <div class="col col-md-2">
+    <label >Item_Name</label>
+    <input  value="{{item.name}}" class="form-control" readonly>
+    </div>
+
+    <div class="col col-md-2">
+    <label >Item_Code</label>
+    <input  value="{{item.item_code}}" class="form-control" readonly>
+    </div>
+
+    <div class="col col-md-2">
+    <label >Quantity : <b> {{item.quantity}}</b></label>
+    <input  type="number"  id="num1" step="any" / min="1" class="form-control" name="quantity" placeholder="" required>
+    </div>
+
+    <div class="col col-md-2">
+    <label >Rate</label>
+    <input  type="number" id="num2" value="{{item.rate}}" class="form-control" readonly>
+    </div>
+
+    <script language="javascript">
+
+    $(document).ready(function(){
+      function calculate() {
+      var num1 = $("#num1").val();
+      var num2 = $("#num2").val();
+      var answer = parseInt(num1) * parseInt(num2);
+      $("#answer").val(answer);
+    };
+      setInterval(()=>{
+      calculate();
+    },2000); 
+    });
+    </script>
+
+    <div class="col col-md-2">
+    <label >Amount : <b>{{item.amount}}</b> </label>
+    <input  type="number" step="any" / min="1" id="answer" class="form-control" name="Rate" placeholder="0" required>
+    </div>
+
+    <div class="col col-md-2">
+    <label >Order_id</label>
+    <input  value=" {{item.Order_id}}" class="form-control" readonly>
+    </div>
+</div>
+<br>
+<center>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</center>
+</form>
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="asd">
+<footer class="page-footer font-small blue">
+
+
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <p> @ManasYeole</p>
+  </div>
+
+
+</footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register to page</title>
+<style>
+body{
+  background-image: url( "{% static 'img/LoginBackground.jpg' %}");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.abc {
+  margin: auto;
+  width: 40%;
+  padding: 40px ;
+  margin-top: 150px;
+  position: center;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px 0 30px 0;
+  opacity: 0.9;
+  font-family: "Lucida Console", Courier, monospace;
+} 
+
+
+h2 {
+background-color: black;
+color: white;
+}
+
+.abc input[type=text]:focus {
+  border: 3px solid #555;
+}
+
+</style>
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+<script defer src="{% static 'fontawesome/js/all.min.js' %}"></script>
+
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+
+
+
+<body>
+<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
+<div class="abc">
+<form action="register" method="post">
+  {% csrf_token %}
+    <center>
+    <h2>REGISTER</h2>
+    </center>
+    <div class="form-group">
+    <label for=""><b>User Name</b></label>
+    <input type="text"  class="form-control" placeholder="Enter User Name" name="username" required>
+    </div>
+
+    <div class="form-group">
+    <label for=""><b>Password</b></label>
+    <input type="password" class="form-control" placeholder="Enter Password" name="password1" required>
+    </div>
+
+    <div class="form-group">
+    {% for message in messages %}
+    <div id="dialog" title="Warning" width="400">
+        <div data-role="body">
+           {{ message }} 
+        </div>
+        <div data-role="footer">
+            <button class="gj-button-md" onclick="dialog.close()">OK</button>
+            <button class="gj-button-md" data-role="close">Cancel</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var dialog;
+        $(document).ready(function () {
+            dialog = $("#dialog").dialog({
+                resizable: true
+            });
+        });
+    </script>
+    <!-- <h2> <center>  <strong> Warning!  </strong>  {{ message }} </center> </h2> -->
+    {% endfor %}
+    </div>
+
+    <div class="form-group">
+    <label for=""><b>Repeat Password</b></label>
+    <input type="password" class="form-control" placeholder="Repeat Password" name="password2" required>
+    </div>
+    <center>
+    <button type="submit" class="btn btn-primary" >Register</button>
+    </center>
+    <a href="{% url 'account:index'  %}" class="btn btn-outline-primary"> Back</a>
+    </form>
+
+</div>
+
+</body>
+</html>

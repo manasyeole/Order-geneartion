@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update_Masterlist</title>
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <script defer src="{% static 'fontawesome/js/all.min.js' %}"></script>
+  <style >
+
+body {
+  background-color: #f0fff0;
+
+}
+
+* {box-sizing: border-box;}
+
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+}
+
+/* Style the header links */
+
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+img {
+  max-width: 35%;
+}
+
+.header a.logo {
+   max-width: 35%;
+}
+
+/* Change the background color on mouse-over */
+.header a:hover {
+  background-color: grey;
+  color: black;
+}
+
+/* Style the active/current link*/
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+/* Float the link section to the right */
+.header-right {
+  float: right;
+}
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
+}
+
+.pqr {
+  margin: auto;
+  background-color: white;
+  width: 700px;
+  border: 3px #f1e1cc;
+  padding: 30px;
+  font-family: "Times New Roman", Times, serif;
+       }
+
+.xyz {
+
+  margin: auto;
+  background-color: #EEEEFF;
+  width: 600px;
+  height: 175px;
+  padding: 15px;
+  border: 3px #f1e1cc;
+
+       }
+
+  </style>
+</head>
+<body>
+
+<div class="header">
+<a href="" class="site-logo"><img src="{% static 'img/logo.png' %}" ></a>
+<div class="header-right">
+        <a href="" class="active">Details</a>
+        <a href="" >  Hey,{{request.user.username|capfirst}} </a>
+        <a href="{% url 'account:index'  %}" class="btn btn-outline-primary"> Back</a>
+</div>
+</div>
+<br>
+<br>
+
+<div class="xyz">
+<form method="POST">
+{% csrf_token %}
+<div class="row">
+    <div class="col col-md-4">
+    <label >Item Code</label>
+    <input type="number" step="any" / min="1" class="form-control" name="Itemcode" placeholder="" required>
+    </div>
+    <div class="col col-md-4">
+    <label >Item Name</label>
+    <input type="text" class="form-control" name="Itemname" placeholder="" required>
+    </div>
+    <div class="col col-md-4">
+    <label >Category</label>
+    <select class="custom-select custom-select"  name="Type" required>
+    <option selected>Types</option>
+    <option value="Type A">Type A</option>
+    <option value="Type B">Type B</option>
+    <option value="Type C">Type C</option>
+    </select> 
+    </div>
+</div>
+<br>
+<center>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</center>
+</form>
+</div>
+
+
+<br>
+<div class="pqr">
+<div class="table-responsive-sm">
+<table class="table table-striped table-bordered ">
+<thead>
+<tr>
+<center><h2><b>MASTER LIST</b></h2></center>
+</tr>
+<tr>
+<th>Item_Code</th>
+<th>Item_Name</th>
+<th>Category</th>
+<th>Options</th>
+</tr>
+</thead>
+<tbody>
+  <div>
+    {% for listitem in Ms_list %}
+    
+    <tr>
+       <td>{{ listitem.Itemcode }}</td>
+       <td>{{ listitem.Itemname }}</td>
+       <td>{{ listitem.Type }}</td>
+       <script >
+        function ConfirmDelete()
+        {
+        var x = confirm("Are you sure you want to delete?");
+        if (x)
+          return true;
+        else
+          return false;
+        }
+        </script>    
+        <td>
+
+        <a href="{%  url 'account:delete_Update_MSlist' listitem.Itemcode %}" Onclick="return ConfirmDelete();" type="submit" value="1" ><img src="{% static 'img/delete.png' %}" style="width:50px"> </a>
+
+        <a href="{% url 'account:edit_Update_MSlist' listitem.Itemcode %}" type="submit" value="1"> <img src="{% static 'img/edit.png' %}" 
+        style="width:50px"></a>
+
+        </td>
+      </tr>
+        {%  endfor %}
+     </tr>
+</div>
+</tbody>
+</table>
+</div>
+</div>
+</body>
+</html>

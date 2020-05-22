@@ -1,0 +1,25 @@
+*********************************************************************************
+Logins:
+
+1.Supervisor:
+username:manas
+Password:manas
+
+2.DepartmnetHead:
+username:admin
+Password:admin
+
+3.Store Manager:
+username: Staff@123
+Password:123456789@s
+
+
+
+*********************************************************************************
+
+Installation Guide:
+
+*******Libraries to be Installed******************************
+
+1.requests
+2.

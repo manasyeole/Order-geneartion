@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EDIT_in_Update_Stock</title>
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <script defer src="{% static 'fontawesome/js/all.min.js' %}"></script>
+  <style >
+
+body {
+  background-color: #f0fff0;
+
+}
+
+* {box-sizing: border-box;}
+
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+}
+
+/* Style the header links */
+
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+img {
+  max-width: 35%;
+}
+
+.header a.logo {
+   max-width: 35%;
+}
+
+/* Change the background color on mouse-over */
+.header a:hover {
+  background-color: grey;
+  color: black;
+}
+
+/* Style the active/current link*/
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+/* Float the link section to the right */
+.header-right {
+  float: right;
+}
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
+}
+
+
+
+.xyz {
+
+  margin: auto;
+  background-color: #EEEEFF;
+  width: 800px;
+  height: 175px;
+  padding: 15px;
+  border: 3px #f1e1cc;
+
+       }
+
+  </style>
+</head>
+<body>
+
+<div class="header">
+<a href="" class="site-logo">
+  <img src="{% static 'img/logo.png' %}" alt="">
+</a>
+ <div class="header-right">
+    <div class="header-right">
+    <a href="" >  Hey,{{request.user.username|capfirst}} </a>
+    <a href="{% url 'account:Update_Stock'  %}" class="btn btn-outline-primary"> Back</a>
+</div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="xyz">
+<form method="POST">
+{% csrf_token %}
+<div class="row">
+
+    <div class="col col-md-3 ">
+    <label >Itemcode </label>
+    <input type="number"  value="{{item.Itemcode}}" class="form-control"  readonly>
+    </div>
+
+    <div class="col col-md-3 ">
+    <label >Itemname </label>
+    <input type="text"  value="{{item.Itemname}}" class="form-control"  readonly>
+    </div>
+
+    <div class="col col-md-3 ">
+    <label >Quantity <b>: {{item.quantity}}</b></label>
+    <input type="number" step="any" / min="1" class="form-control" id="quantity" name="quantity" required>
+    </div>
+
+    <div class="col col-md-3">
+    <label >Rate <b>: {{item.price}}</b></label>
+    <input type="number" step="any" / min="1" class="form-control" id="rate" name="rate" required>
+    </div>
+
+</div>
+<br>
+<center>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</center>
+</form>
+</div>
+
+
+<br>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<select class="custom-select custom-select"  name="Item_Code" required>
+  <option selected>Open this select menu</option>
+  {% for obj in object_list %}
+  <option value= {{obj.itemcode}}> {{obj.itemcode}} </option>
+  {% endfor %}
+
+
+
+
+
+
+
+
+  <div class="col-md-2 ">
+<label >ItemCode</label>
+ <select class="custom-select custom-select"  name="Item_Name" required>
+  <option selected>Open this select menu</option>
+  {% for name in name_item %}
+  <option value= {{name.Itemname}}> {{name.Itemname}} </option>
+  {% endfor %}
+  </select> 
+</div
+
+
+
+
+
+      ids=int(ids)
+      order_id=Order.objects.get(pk=ids)
+      order_id.isapprovedbystoreman=isapprovedbystoreman
+
+
+
+
+
+       <!-- <td><button type="button" class="btn btn-info">Edit</button>
+        <a href="{%  url 'account:delete-item_storeman' item.Order_id item.pk %}"  class="btn btn-danger">Delete</a></td> -->
+
+
+
+
+<center>
+<input id="timepicker" width="276" />
+<script>
+        $('#timepicker').timepicker();
+</script>
+</center>
+
+
+
+
+______-------------Javascript codes------------------______________________________________
+
+
+
+Msg when Delete record
+
+<script type="text/javascript">  
+function msg(){  
+var v= confirm("Are u sure?");  
+if(v==true){  
+alert("ok");  
+}  
+else{  
+alert("cancel");  
+}  
+  
+}  
+</script>  
+  
+<input type="button" value="delete record" onclick="msg()"/>  
+
+
+
+-------------------------------------------------------------------------------------
